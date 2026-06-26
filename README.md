@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+﻿# 영양제 추천 웹서비스
 
-## Getting Started
+건강 설문 5문항을 작성하면 GPT-4o가 맞춤 영양제를 추천하고, 약국 제품 vs 온라인 제품을 비교한 뒤 최종 추천까지 해주는 한국어 웹 앱. **비상업용 연습 프로젝트.**
 
-First, run the development server:
+## 서비스 플로우
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+건강 설문 (5문항) → AI 영양제 카테고리 추천 (3~4개)
+→ 약국 제품 vs 온라인 제품 비교 → AI 최종 추천 + 약국 지도 / 쿠팡 링크
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 기술 스택
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| | |
+|---|---|
+| 프레임워크 | Next.js 16.2.9 (App Router, TypeScript) |
+| 스타일 | Tailwind CSS v4 |
+| AI | OpenAI GPT-4o |
+| 지도 | Kakao Maps JS SDK + Kakao Local REST API |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 실행 방법
 
-## Learn More
+```bash
+# 1. 환경변수 설정
+cp .env.local.example .env.local
+# OPENAI_API_KEY, KAKAO_REST_API_KEY, NEXT_PUBLIC_KAKAO_MAP_KEY 입력
 
-To learn more about Next.js, take a look at the following resources:
+# 2. 의존성 설치 및 개발 서버 실행
+npm install
+npm run dev
+# → http://localhost:3000
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 주요 한계
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 리뷰 및 제품 정보가 하드코딩된 가상 데이터 (실시간 DB 없음)
+- AI 추천은 설문 기반이며 의학적 조언을 대체하지 않음
+- 현재 로컬(`localhost:3000`) 전용, 미배포 상태
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*자세한 내용은 [awstest1.md](awstest1.md) 참고*
